@@ -1,0 +1,160 @@
+﻿@using Microsoft.CodeAnalysis.CSharp
+@using System.Linq
+@model FirstZX.Core.DTO.EditeUserForAdminViewModel
+
+@{
+    ViewData["Title"] = "EditeUserForAdmin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container">
+    <div class="main-body">
+
+        <div class="align-items-center">
+            <div class="text text-primary ">
+                <br />
+                <h3>Edite user </h3>
+                <br />
+            </div>
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <form asp-action="EditeUserForAdmin" method="post" enctype="multipart/form-data">
+                @if (ViewBag.IsSuccess != null)
+                {
+                    <div class="alert alert-success"> Saved </div>
+                }
+                @*<input type="hidden" asp-for="UserSelectedRoles"  />*@
+
+
+                <div class="form-group">
+                    <label asp-for="FirstName" class="control-label"></label>
+                    <input asp-for="FirstName" class="form-control" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LastName" class="control-label"></label>
+                    <input asp-for="LastName" class="form-control" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+
+                    <input type="hidden" asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Rank"> Select Rank</label>
+                    <select  class="form-control" asp-for="Rank" >
+                        <option value="Active" >Active</option> 
+                        <option value="Starter" >Starter</option> 
+                        <option value="Planner">Planner</option>
+                        <option value="Star" >Star</option>
+                        <option value="Senior Star">Senior Star</option>
+                        <option value="Executive">Executive</option>
+                        <option value="Silver">Silver</option>
+                        <option value="Gold">Gold</option>
+                        <option value="Platinume">Platinume</option>
+                        <option value="Diamond">Diamond</option>
+                        <option value="Crown Diamond">Crown Diamond</option>
+                        <option value="Royal Crown Diamond">Royal Crown Diamond</option>
+                        <option value="Free Down">Free Down</option>
+                    </select>
+                    <span asp-validation-for="Rank" class="text-danger"></span>
+                </div>
+
+                 <div class="form-group">
+                     <label asp-for="SelectedPlan"> Select Plan</label>
+                    <select  class="form-control" asp-for="SelectedPlan" >
+                        <option value="Uni Level" >Uni Level</option> 
+                        <option value="Binary" >Binary</option> 
+                    </select>
+                    <span asp-validation-for="Rank" class="text-danger"></span>
+                </div>
+                
+                
+               
+
+
+
+                <div class="checkbox">
+
+                    <label>
+                        <input asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <input type="hidden" asp-for="UserAvatar" class="form-control" />
+                    <span asp-validation-for="UserAvatar" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="RegisterDate" class="control-label"></label>
+                    <input asp-for="RegisterDate" class="form-control" />
+                    <span asp-validation-for="RegisterDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="IdentifireEmail" class="control-label"></label>
+                    <input asp-for="IdentifireEmail" class="form-control" />
+                    <span asp-validation-for="IdentifireEmail" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="IdentifireKey" class="control-label"></label>
+                    <input asp-for="IdentifireKey" class="form-control" />
+                    <span asp-validation-for="IdentifireKey" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DigitalWalletId" class="control-label"></label>
+                    <input asp-for="DigitalWalletId" class="form-control" />
+                    <span asp-validation-for="DigitalWalletId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ValidId" class="control-label"></label>
+                    <input asp-for="ValidId" class="form-control" />
+                    <span asp-validation-for="ValidId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Country" class="control-label"></label>
+                    <input asp-for="Country" class="form-control" />
+                    <span asp-validation-for="Country" class="text-danger"></span>
+                </div>
+
+
+                <div class="row ">
+                    <div>
+                        <label>Profile Photo</label>
+                    </div>
+                    <div class=" text-secondary">
+                        <input type="file" asp-for="UserAvatarFormFile" class="form-control" id="customFile" />
+                    </div>
+                </div>
+                <br />
+                <div class="p-2 form-group- border ">
+                    <label class="control-label"> Role </label>
+
+
+                    @foreach (var item in ViewBag.Roles)
+                    {
+
+                        <div class="checkbox">
+                            <input type="checkbox" name="SelectedRole" value="@item.RoleId" @((Model.UserSelectedRoles.Any(r => r == item.RoleId) ? "checked" : "")) />@item.RoleTitle
+
+
+                        </div>
+
+
+                    }
+
+                </div>
+
+                <div class="d-grid">
+                    <br />
+                    <button type="submit" class="btn  btn-primary btn-block">Save</button>
+                </div>
+
+            </form>
+
+
+
+        </div>
+</div>
+</div>

@@ -1,0 +1,106 @@
+﻿@model FirstZX.Core.DTO.ListOfRequestForAdmin
+@{
+    ViewData["Title"] = "ListOfRequest";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<div class="card mb-4">
+    <div class="card-body">
+        <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
+
+            <form asp-action="ListOfRequest" asp-area="Admin" asp-controller="BankRequestForAdmin" method="get">
+                <div class="row">
+                    <div class="col-10">
+                        <input type="text" name="filterEmail" class="form-control" placeholder="Email" />
+                    </div>
+                    @*<div class="col-5">
+                        <input type="text" name="filterUserId" class="form-control" placeholder="Id" />
+                    </div>*@
+                    <div class="col-2 d-grid">
+                        <button type="submit" class="btn  btn-outline-primary btn-block">Search</button>
+                    </div>
+                </div>
+            </form>
+
+            <br />
+            <div class="dataTable-container ">
+                <table id="datatablesSimple" class="dataTable-table border border-top">
+                    <thead>
+                        <tr>
+                            <th>Row</th>
+                            <th>User ID</th>
+                            <th>Email</th>
+                            <th>Request Time</th>
+                            <th>Request</th>
+                            <th>Status</th>
+                            <th>@*<a href="/EditeUserForBank?id=" name="" class="btn btn-outline-success btn-sm d-grid">Accept ALL</a>*@</th>
+                            <th>@*<a href="/EditeUserForBank?id=" name="" class="btn btn-outline-danger btn-sm d-grid">Delete All</a>*@</th>
+                            
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @if (@Model.BankRequests != null)
+                        {
+                            for (int i = 0; i < @Model.BankRequests.Count; i++)
+                            {
+                                <tr>
+                                    <td style="width: 5%">@(i+1)</td>
+                                    <td>@Model.BankRequests[i].UserId</td>
+                                    <td>@Model.BankRequests[i].Email</td>
+                                    <td>@Model.BankRequests[i].RequestTime</td>
+                                    
+
+                                    @if (@Model.BankRequests[i].CashOut == true)
+                                    {
+                                        <td class="text-danger"> Cash Out </td>
+                                    }
+                                    @if (@Model.BankRequests[i].Reinvest == true)
+                                    {
+                                        <td class="text-success"> Reinvest </td>
+                                    }
+                                    @if (@Model.BankRequests[i].ConfirmCashout==true)
+                                    {
+                                        <td>Cash Out Confirmed </td>
+                                    }
+                                    @if (@Model.BankRequests[i].ConfirmReinvest == true)
+                                    {
+                                        <td>Reinvest Confirmed </td>
+                                    }
+
+                                    @if(@Model.BankRequests[i].ConfirmCashout==false && @Model.BankRequests[i].ConfirmReinvest == false)
+                                    {
+                                        <td></td>
+                                    }
+                                   
+
+                                    <td ><a  href="/AcceptForUser?id=@Model.BankRequests[i].UserId&pageId=@Model.CurrentPage" name="" class="btn btn-success btn-sm d-grid">Accept</a></td>
+                                    <td ><a href="/DeleteBankRequestForUser?id=@Model.BankRequests[i].UserId&pageId=@Model.CurrentPage" name="" class="btn btn-danger btn-sm d-grid">Delete</a></td>
+
+                                </tr>
+                            }
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="dataTable-bottom">
+
+                <nav class="dataTable-pagination">
+                    <ul class="dataTable-pagination-list">
+                        @for (int i = 1; i <= Model.PageCount; i++)
+                        {
+                            <li class=" @((i == Model.CurrentPage) ? "active" : "")">
+                                <a href="/Admin/BankRequestForAdmin/ListOfRequest?pageId=@i">@i</a>
+                            </li>
+                        }
+                        
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+

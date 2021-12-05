@@ -1,0 +1,103 @@
+﻿@model FirstZX.Core.DTO.UserInformationViewModel
+@{
+    ViewData["Title"] = "Index";
+
+}
+
+<br/>
+<br/>
+<div class="container">
+    <div class="main-body">
+
+        <div class="row gutters-sm">
+          <partial name="_sideUserpanel"/>
+            <div class="col-md-8">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Full Name</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                @Model.LastName   @Model.FirstName
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Email</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                @Model.Email
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">RegisterDate</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+
+                                @Model.RegisterDate
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Valid Id</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                @Model.ValidId
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Digital Wallet Id</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                @Model.DigitalWalletId
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Referral</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                @Model.IdentifireEmail
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Digital Pin</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                @Model.IdentifireKey
+                            </div>
+                        </div>
+                        <hr/>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Selected Plan</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                @Model.SelectedPlan
+                            </div>
+                        </div>
+                        <hr>
+                        @*<div class="row">
+            <div class="col-sm-12">
+                <a class="btn btn-info " target="__blank" href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills">Edit</a>
+            </div>
+        </div>*@
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+</div>

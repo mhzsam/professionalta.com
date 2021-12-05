@@ -1,0 +1,246 @@
+﻿
+@model FirstZX.Core.DTO.BankAndBankRequest;
+@{
+    ViewData["Title"] = "BankForUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<h2>Month Bank</h2>
+<br />
+<div class="card mb-4">
+    <div class="card-header">
+        <div class="row">
+        </div>
+        <div class="row">
+            <div class="col-10">Your Bank</div>
+            <div class="col-2 d-grid">
+                <a type="button" class="btn  btn-warning btn-block" asp-action="Index" asp-area="UserPanel" asp-controller="UserPanel">Back to List </a>
+            </div>
+        </div>
+
+    </div>
+    <div class="card-body">
+        <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
+            <div class="dataTable-container ">
+                @for (var i = 0; i < Model.Banks.Count; i++)
+                {
+                    <div>
+                        <input type="hidden" asp-for="@Model.Banks[i].UserId" />
+                        <input type="hidden" asp-for="@Model.Banks[i].BankMonthId" />
+                    </div>
+                }
+                <table id="datatablesSimple" class="dataTable-table border border-top">
+                    <thead>
+                        <tr>
+                            <th>Row</th>
+                            <th>Saving</th>
+                            <th>Invest Month</th>
+                            <th>Direct Sell</th>
+                            <th>In Direct</th>
+                            <th>Uni Level</th>
+                            <th>Binary</th>
+                            <th>Matrix</th>
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @for (var i = 0; i < Model.Banks.Count; i++)
+                        {
+
+                            <tr>
+                                <td>
+                                    @(i+1)
+                                </td>
+                                <td>
+                                    @Model.Banks[i].Saving
+                                </td>
+                                <td>
+                                    @Model.Banks[i].InvestMonth
+                                </td>
+
+                                <td>
+                                    @Model.Banks[i].DirectSell
+                                </td>
+                                 <td>
+                                    @Model.Banks[i].InDirect
+                                </td>
+                                 <td>
+                                    @Model.Banks[i].UniLevel
+                                </td>
+                                <td>
+                                    @Model.Banks[i].Binary
+                                </td>
+                                <td>
+                                    @Model.Banks[i].Matrix
+                                </td>
+
+                            </tr>
+                        }
+                    <tr style="color: green;text-align: right">
+                        <td>
+                            Sum
+                        </td>
+                        <td>
+                            @{
+                                double sumTotal = 0;
+                                foreach (var item in Model.Banks)
+                                {
+                                    sumTotal += (item.Saving);
+                                }
+                            }
+                            <p>@sumTotal</p>
+                        </td>
+                        <td>
+                            @{
+                                double sumWeek = 0;
+                                foreach (var item in Model.Banks)
+                                {
+                                    sumWeek += (item.InvestMonth);
+                                }
+                            }
+                            <p>@sumWeek</p>
+                        </td>
+
+                        <td>
+                            @{
+                                double DirectSell = 0;
+                                foreach (var item in Model.Banks)
+                                {
+                                    DirectSell += (item.DirectSell);
+                                }
+                            }
+                            <p>@DirectSell</p>
+                        </td>
+                        <td>
+                            @{
+                                double InDirect = 0;
+                                foreach (var item in Model.Banks)
+                                {
+                                    InDirect += (item.InDirect);
+                                }
+                            }
+                            <p>@InDirect</p>
+                        </td>
+                        <td>
+                            @{
+                                double UniLevel = 0;
+                                foreach (var item in Model.Banks)
+                                {
+                                    UniLevel += (item.UniLevel);
+                                }
+                            }
+                            <p>@UniLevel</p>
+                        </td>
+                        <td>
+                            @{
+                                double Binary = 0;
+                                foreach (var item in Model.Banks)
+                                {
+                                    Binary += (item.Binary);
+                                }
+                            }
+                            <p>@Binary</p>
+                        </td>
+                        <td>
+                            @{
+                                double Matrix = 0;
+                                foreach (var item in Model.Banks)
+                                {
+                                    Matrix += (item.Matrix);
+                                }
+                            }
+                            <p>@Matrix</p>
+                        </td>
+                    </tr>
+
+
+                    </tbody>
+                </table>
+
+
+
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="card-body">
+        <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
+            <div class="row">
+                <div class="col-6"></div>
+                <div class=" col-lg-6 col-sm-12">
+
+                    <table id="datatablesSimple" class="dataTable-table border border-top">
+                        <thead>
+                            <tr>
+                                <th>Reward 1</th>
+                                <th>Reward 2</th>
+                                <th>Reward 3</th>
+                                <th>Reward 4</th>
+                                
+                            </tr>
+                        </thead>
+                        <tr>
+
+                            @if (Model.BankDetailEarn != null)
+                            {
+                                <td>@Model.BankDetailEarn.RewardEarnmonth1</td>
+                                <td>@Model.BankDetailEarn.RewardEarnmonth2</td>
+                                <td>@Model.BankDetailEarn.RewardEarnmonth3</td>
+                                <td>@Model.BankDetailEarn.RewardEarnmonth4</td>
+                            }
+
+
+                        </tr>
+
+                        <tbody>
+                        </tbody>
+                    </table>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card ">
+    <div class="card-header m-0">
+        <div class="row">
+            <div class="col-12">Your Bank Request</div>
+        </div>
+    </div>
+    <div class="card-body  ">
+
+
+        <div class="container ">
+            <div class="row">
+                <div class="col-2 d-grid ">
+
+                    <a type="button" class="btn  btn-success btn-block" href="/UserReinvet?id=@Model.UserID">Reinvest </a>
+
+                </div>
+                <div class="col-2 d-grid ">
+                    <a type="button" class="btn  btn-danger btn-block" href="/UserCashOut?id=@Model.UserID">Cash Out </a>
+                </div>
+                <div class="col-8  ">
+
+                    <span class="border rounded-1 border-warning d-block p-1 ">@TempData["RequestStatus"].ToString()</span>
+
+                </div>
+
+
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+
+
+

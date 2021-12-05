@@ -1,0 +1,92 @@
+﻿@model List<FirstZX.Datalayer.Entities.User.UserAnswer>
+@{
+    ViewData["Title"] = "Forecast";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br/>
+@if (ViewBag.UAIdIsDeactive == true)
+{
+<div class="alert alert-danger">
+    <strong>You Submiteted before</strong> You can not Change It
+
+</div>
+}
+@if (ViewBag.TimeOfNextLevel == true)
+{
+<div class="alert alert-danger">
+    <strong>You Next Level Is Lock</strong> You can Start After This Day
+
+</div>
+}
+
+
+@if (Model.Count == 0)
+{
+    <br/>
+
+    <a type="button" class="btn  btn-success btn-block d-grid" href="/StartForecast?userId=@ViewBag.userId">Start </a>
+}
+else
+{
+    <div class="card mb-4">
+        <div class="card-header">
+            <div class="row">
+
+            </div>
+            <div class="row">
+                <div class="col-10">Forecast</div>
+                <div class="col-2">
+                    <div class="d-grid">
+                        <a type="button" class="btn  btn-warning btn-block" href="/Userpanel/UserPanel/">Back to Panel </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
+                <br />
+                <div class="dataTable-container ">
+
+                    <table id="datatablesSimple" class="dataTable-table border border-top">
+                        <thead>
+                        <tr>
+                            <th>level</th>
+                            <th>Time</th>
+                            <th>Action</th>
+
+
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @for (var i = 0; i < Model.Count; i++)
+                        {
+                            <tr>
+                                <th>@(i+1)</th>
+                                <th>@Model[i].DateTime</th>
+                                <th>
+                                    <a type="button" class="btn  btn-outline-success btn-block d-grid" href="AddForcast?UAId=@Model[i].UserAnswerId">Add Your Forcast </a>
+                                </th>
+                            </tr>
+                        }
+                        
+                        </tbody>
+                    </table>
+
+
+
+
+
+                </div>
+
+            </div>
+
+       
+        </div>
+    </div>
+    <div>
+    
+        <a type="button" class="btn  btn-success btn-block d-grid" href="/NextLevelForcast?userId=@ViewBag.userId">Next Level </a>
+    </div> 
+}
+

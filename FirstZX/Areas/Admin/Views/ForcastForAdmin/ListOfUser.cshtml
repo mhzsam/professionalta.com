@@ -1,0 +1,84 @@
+﻿@model FirstZX.Core.DTO.GetUserForecastForAdninViewModel
+@{
+    ViewData["Title"] = "ListOfUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>List Of User Forecast</h2>
+
+
+
+<div class="card mb-4">
+    <div class="card-body">
+        <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
+
+
+            <form asp-action="ListOfUser" asp-area="Admin" asp-controller="ForcastForAdmin" method="get">
+                <div class="row">
+                    <div class="col-sm-9 col-md-9">
+                        <input type="text" name="filterEmail" class="form-control" placeholder="Email" />
+                    </div>
+
+                    <div class="col-sm-3 col-md-3">
+                        <button type="submit" class="btn  btn-outline-primary btn-block">Search</button>
+                    </div>
+                </div>
+            </form>
+
+            <br />
+            <div class="dataTable-container ">
+                <table id="datatablesSimple" class="dataTable-table border border-top">
+                    <thead>
+                    <tr>
+                        <th>Row</th>
+                        <th>User Id</th>
+                        <th>Email</th>
+                        <th>Time</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    @for (var i=0;i<Model.UserAnswers.Count;i++ )
+                    {
+                        <tr>
+                            <td>@(i+1)</td>
+                            <td>@Model.UserAnswers[i].UserId</td>
+                            <td>@Model.UserAnswers[i].Email</td>
+                            <td>@Model.UserAnswers[i].DateTime</td>
+                             
+                            <td class="d-grid">
+                                <a href="/ViewUserForecast?UAId=@Model.UserAnswers[i].UserAnswerId" name="@Model.UserAnswers[i].UserId" class="btn btn-outline-primary btn-sm ">View</a>
+                                
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+            <div class="dataTable-bottom">
+
+                <nav class="dataTable-pagination">
+                    <ul class="dataTable-pagination-list">
+                        @for (int i = 1; i <= Model.PageCount; i++)
+                        {
+                            <li class=" @((i==Model.CurrentPage)?"active":"")">
+                                <a href="/Admin/Admin/EditeUserAdmin?pageid=@i">@i</a>
+                            </li>
+                        }
+                        <li class="pager">
+                            <a href="#" data-page="2">›</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <form method="post" asp-area="Admin" asp-controller="ForcastForAdmin" asp-action="ExportForecastAdmin">
+        <button type="submit" class="btn btn-outline-primary btn-sm "value="Export">Download Excel</button>
+    
+    </form>
+
+</div>

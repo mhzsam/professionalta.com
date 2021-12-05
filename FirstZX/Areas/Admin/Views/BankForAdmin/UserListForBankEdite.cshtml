@@ -1,0 +1,101 @@
+﻿@model FirstZX.Core.DTO.UsersForAdminViewModel
+@{
+    ViewData["Title"] = "UserListForBankEdite";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<h2>User List For Bank </h2>
+
+
+
+
+<div class="card mb-4">
+    <div class="card-body">
+        <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
+
+            @*<div class="dataTable-dropdown">
+                    <label>
+                        <select class="dataTable-selector">
+                            <option value="5">5</option>
+                            <option value="10" selected="">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                            <option value="25">25</option>
+                        </select> entries per page
+                    </label>
+                </div>*@
+            <form asp-action="UserListForBankEdite" asp-area="Admin" asp-controller="BankForAdmin" method="get">
+                <div class="row">
+                    <div class="col-sm-9 col-md-9">
+                        <input type="text" name="filterEmail" class="form-control" placeholder="Email" />
+                    </div>
+                    @*<div class="col-sm-5 col-md-5">
+                            <input type="text" name="filterUserId" class="form-control" placeholder="Id"/>
+                        </div>*@
+                    <div class="col-sm-3 col-md-3">
+                        <button type="submit" class="btn  btn-outline-primary btn-block">Search</button>
+                    </div>
+                </div>
+            </form>
+
+            <br />
+            <div class="dataTable-container ">
+                <table id="datatablesSimple" class="dataTable-table border border-top">
+                    <thead>
+                        <tr>
+                            <th>User Id</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <th>Status</th>
+                            <th>Edite</th>
+
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model.Users)
+                        {
+                            <tr>
+                                <td>@item.UserId</td>
+                                <td>@item.FirstName</td>
+                                <td>@item.LastName</td>
+                                <td>@item.Email</td>
+                                <td>
+                                    @if (@item.IsActive)
+                                    {
+                                        <p class="text-success">Active</p>
+                                    }
+                                    else
+                                    {
+                                        <p class="text-danger">DeActive</p>
+                                    }
+                                </td>
+                                <td>
+                                    <a href="/EditeUserForBank?id=@item.UserId" name="@item.UserId" class="btn btn-warning btn-sm">Edite Bank</a>
+                                 </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="dataTable-bottom">
+            
+                <nav class="dataTable-pagination">
+                    <ul class="dataTable-pagination-list">
+                        @for (int i = 1; i <= Model.PageCount; i++)
+                        {
+                            <li class=" @((i==Model.CurrentPage)?"active":"")">
+                                <a href="/Admin/Admin/EditeUserAdmin?pageid=@i">@i</a>
+                            </li>
+                        }
+                        <li class="pager">
+                            <a href="#" data-page="2">›</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>

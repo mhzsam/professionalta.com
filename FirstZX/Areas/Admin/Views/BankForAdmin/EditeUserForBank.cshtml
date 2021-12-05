@@ -1,0 +1,213 @@
+﻿@using Microsoft.EntityFrameworkCore.Storage
+@using System.Linq
+@model FirstZX.Core.DTO.EditUserForBankBankDetailEarn
+
+@{
+    ViewData["Title"] = "EditeUserForBank";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+
+@if (ViewBag.Issuccuss == true)
+{
+    <div class="alert alert-success">
+        <strong>Saved Success!</strong> Your bank changes have been saved
+
+    </div>
+}
+<div class="card mb-4">
+    <div class="card-header">
+        <div class="row">
+        </div>
+        <div class="row">
+            <div class="col-8">Edite User Bank</div>
+            <div class="col-2">
+                <form asp-area="Admin" asp-action="AddBankRow" asp-controller="BankForAdmin" method="post">
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn  btn-outline-primary" name="id" value="@Model.UserId">Add New</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-2">
+                <div class="d-grid">
+                    <a type="button" class="btn  btn-warning btn-block" href="bankuserlist">Back to List </a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="card-body">
+
+        <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
+
+            <br />
+
+
+            <div class="dataTable-container ">
+                <form asp-area="Admin" asp-controller="BankForAdmin" asp-action="SaveEditeRowForAdmin" method="post">
+
+                    @for (var i = 0; i < Model.EditBankForAdminViewModels.Count; i++)
+                    {
+                        <div>
+                            <input type="hidden" asp-for="@Model.EditBankForAdminViewModels[i].UserId" />
+                            <input type="hidden" asp-for="@Model.EditBankForAdminViewModels[i].BankMonthId" />
+                            <input type="hidden" asp-for="@Model.UserId" />
+                        </div>
+                    }
+                    <table id="datatablesSimple" class="dataTable-table border border-top">
+                        <thead>
+                            <tr>
+                                <th>Row</th>
+                                <th>Saving</th>
+                                <th>Invest Month</th>
+                                <th>Direct Sell</th>
+                                <th>In Direct</th>
+                                <th>Uni Level</th>
+                                <th>Binary</th>
+                                <th>Matrix</th>
+                                <th></th>
+
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            @for (var i = 0; i < Model.EditBankForAdminViewModels.Count; i++)
+                            {
+
+                                <tr>
+                                    <td>
+                                        @(i+1)
+                                    </td>
+                                    <td>
+                                        <input class="form-control" asp-for="@Model.EditBankForAdminViewModels[i].Saving" />
+                                    </td>
+                                    <td>
+                                        <input class="form-control" asp-for="@Model.EditBankForAdminViewModels[i].InvestMonth" />
+                                    </td>
+
+                                    <td>
+                                        <input class="form-control" asp-for="@Model.EditBankForAdminViewModels[i].DirectSell" />
+                                    </td>
+                                    <td>
+                                        <input class="form-control" asp-for="@Model.EditBankForAdminViewModels[i].InDirect" />
+                                    </td>
+                                     <td>
+                                        <input class="form-control" asp-for="@Model.EditBankForAdminViewModels[i].UniLevel" />
+                                    </td>
+                                     <td>
+                                        <input class="form-control" asp-for="@Model.EditBankForAdminViewModels[i].Binary" />
+                                    </td>
+                                    <td>
+                                        <input class="form-control" asp-for="@Model.EditBankForAdminViewModels[i].Matrix" />
+                                    </td>
+
+                                    <td>
+
+
+                                        <div class="d-grid">
+                                           
+                                            <a type="submit" class="btn btn-sm  btn-outline-danger" href="/DeleteRowForAdmin?BankId=@(Model.EditBankForAdminViewModels[i].BankMonthId)">Delete</a>
+                                        </div>
+
+                                    </td>
+                                </tr>
+                            }
+
+
+                        </tbody>
+                    </table>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-success  ">Save Bank</button>
+                    </div>
+                </form>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+@if (ViewBag.IssuccussEBD == true)
+{
+    <div class="alert alert-success">
+        <strong>Saved Success!</strong> Your Bank Earn changes have been saved
+
+    </div>
+}
+
+<div class="card mb-4">
+    <div class="card-header">
+        <div class="row">
+
+        </div>
+        <div class="row">
+            <div class="col-10">Edite User Earn Bank</div>
+            <div class="col-2">
+                <div class="d-grid">
+                    <a type="button" class="btn  btn-warning btn-block" href="bankuserlist">Back to List </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
+            <br />
+            <div class="dataTable-container ">
+                <form asp-area="Admin" asp-controller="BankForAdmin" asp-action="SaveEarnBankOfUser" method="post">
+                    <div>
+                        <input type="hidden" asp-for="BankDetailEarn.UserId" />
+                        <input type="hidden" asp-for="BankDetailEarn.BankDetailEarnId" />
+                    </div>
+                    <table id="datatablesSimple" class="dataTable-table border border-top">
+                        <thead>
+                            <tr>
+                                <th>Reward 1</th>
+                                <th>Reward 2</th>
+                                <th>Reward 3</th>
+                                <th>Reward 4</th>
+                                
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+
+                                @if (Model.BankDetailEarn != null)
+                                {
+                                    <td><input class="form-control " asp-for="BankDetailEarn.RewardEarnmonth1" /></td>
+                                    <td><input class="form-control " asp-for="BankDetailEarn.RewardEarnmonth2" /></td>
+                                    <td><input class="form-control " asp-for="BankDetailEarn.RewardEarnmonth3" /></td>
+                                    <td><input class="form-control " asp-for="BankDetailEarn.RewardEarnmonth4" /></td>
+                                }
+
+                            </tr>
+                        </tbody>
+                    </table>
+                    @if (Model.BankDetailEarn == null)
+                    {
+                        <br />
+                        <div class="d-grid">
+
+                            <a type="submit" class="btn btn-sm  btn-outline-primary " href="/CreateEarnBank?Id=@(Model.UserId)">Create</a>
+                        </div>
+                        <br />
+                    }
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-success  ">Save Earn Bank</button> 
+                    </div>
+                </form>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+
+

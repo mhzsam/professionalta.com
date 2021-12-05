@@ -1,0 +1,109 @@
+﻿@model List<FirstZX.Datalayer.Entities.User.Answer>
+@{
+    ViewData["Title"] = "ViewUserForecast";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+
+@if (ViewBag.IsRestart == true)
+{
+    <div class="alert alert-success">
+        <strong>Restart Success!</strong> Your User Forecast Is Restarting 
+
+    </div>
+}
+
+<div class="card mb-4">
+    <div class="card-header">
+        <div class="row">
+        </div>
+        <div class="row">
+            <div class="col-8">Add Forcast</div>
+            <div class="col-2">
+                <div class="d-grid">
+                    <a type="button" class="btn  btn-warning btn-block" href="/Admin/ForcastForAdmin/ListOfUser">Back List </a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="card-body">
+
+        <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
+
+            <br />
+
+            <div asp-validation-summary="All"></div>
+            <div class="dataTable-container ">
+                
+
+                <table id="datatablesSimple" class="dataTable-table border border-top">
+                    <thead>
+                    <tr>
+                        <th>Row</th>
+                        <th>Coin</th>
+                        <th>Ratio Of Coin</th>
+                        <th>Buy or Sell</th>
+                        <th>Percentage</th>
+                        <th></th>
+
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                    @for (var i = 0; i < Model.Count; i++)
+                    {
+
+                        <tr>
+                            <td>
+                                @(i+1)
+                            </td>
+                            <td>
+                                @Model[i].Cryptocurrency
+                                       
+                            </td>
+                            <td>
+                                @Model[i].RatioCryptocurrency"
+                            </td>
+
+                                  
+                            @if (Model[i].BuyOrSell==1)
+                            {
+                                <td>Buy</td>
+                            }
+                            else
+                            {
+                                <td>Sell</td>
+                            }
+                                    
+                            <td>
+                                @Model[i].Percentage
+                                       
+                            </td>
+
+                        </tr>
+                    }
+
+
+                    </tbody>
+                </table>
+
+                    
+           
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+    <div>
+        <a type="button" class="btn  btn-danger btn-block d-grid" href="/RestartUserForcast?UAId=@Model[0].UserAnswerId">Restart User Forcast </a>
+    </div>
+
+
+
+
